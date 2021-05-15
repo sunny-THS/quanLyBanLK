@@ -1,0 +1,2 @@
+Kiểm tra DONGIA, SOLUONG trong bảng CHITIETPN, CHITIETHD lớn hơn 0
+Viết trigger cập nhật trị giá trong bảng HOADON, PHIEUNHAP
