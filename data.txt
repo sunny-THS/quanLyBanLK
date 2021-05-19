@@ -1,39 +1,39 @@
 INSERT LOAILK
 VALUES
-('MOU',N'Chu?t'),
-('LAP',N'M·y tÌnh s·ch tay'),
-('CPU',N'B? x? lÌ'),
-('PCX',N'M·y tÌnh d? b‡n'),
+('MOU',N'Chu·ªôt'),
+('LAP',N'M√°y t√≠nh s√°ch tay'),
+('CPU',N'B·ªô x·ª≠ l√≠'),
+('PCX',N'M√°y t√≠nh ƒë·ªÉ b√†n'),
 ('MAI',N'Mainboard'),
-('KEYB',N'B‡n phÌm'),
+('KEYB',N'B√†n ph√≠m'),
 ('HP',N'Tai nghe'),
-('SCREEN',N'M‡n hÏnh'),
-('PROJ',N'M·y chi?u')
+('SCREEN',N'M√†n h√¨nh'),
+('PROJ',N'M√°y chi·∫øu')
 
 SET DATEFORMAT DMY
 INSERT LINHKIEN
 VALUES
-('SCREEN001',N'M‡n hÏnh m·y tÌnh ASUS','20/10/2018',12,'SCREEN','ASUS',N'C·i',20),
-('SCREEN002',N'M‡n hÏnh m·y tÌnh DELL','12/04/2018',12,'SCREEN','DELL',N'C·i',15),
-('MOU001',N'ChU?t cÛ d‚y LOGITECH','19/06/2019',6,'MOU','LOGITECH',N'C·i',34),
-('MOU002',N'ChU?t khÙng d‚y LOGITECH','19/06/2019',6,'MOU','LOGITECH',N'C·i',10),
-('MAI001',N'Mainboard ASUS','17/5/2020',12,'MAI','ASUS',N'C·i',27),
-('MAI002',N'Mainboard ATXX','16/6/2020',12,'MAI','ATXX',N'C·i',12),
-('CPU001',N'CPU Itel','28/10/2018',12,'CPU','Itel',N'C·i',10),
-('KEYB001',N'B‡n phÌm LOGITECH','20/10/2018',6,'KEYB','LOGITECH',N'C·i',4),
-('HP001',N'Tai nghe SONY','4/6/2019',12,'HP','SONY',N'C·i',20),
-('PROJ001',N'M·y chi?u DELL','20/10/2018',12,'PROJ','DELL',N'C·i',10),
-('PROJ002',N'M·y chi?u HP','20/10/2018',12,'PROJ','HP',N'C·i',10),
-('PCX001',N'ASUS 20144','20/10/2018',12,'PCX','ASUS',N'C·i',5)
+('SCREEN001',N'M√†n h√¨nh m√°y t√≠nh ASUS','20/10/2018',12,'SCREEN','ASUS',N'C√°i',20),
+('SCREEN002',N'M√†n h√¨nh m√°y t√≠nh DELL','12/04/2018',12,'SCREEN','DELL',N'C√°i',15),
+('MOU001',N'ChU·ªôt c√≥ d√¢y LOGITECH','19/06/2019',6,'MOU','LOGITECH',N'C√°i',34),
+('MOU002',N'ChU·ªôt kh√¥ng d√¢y LOGITECH','19/06/2019',6,'MOU','LOGITECH',N'C√°i',10),
+('MAI001',N'Mainboard ASUS','17/5/2020',12,'MAI','ASUS',N'C√°i',27),
+('MAI002',N'Mainboard ATXX','16/6/2020',12,'MAI','ATXX',N'C√°i',12),
+('CPU001',N'CPU Itel','28/10/2018',12,'CPU','Itel',N'C√°i',10),
+('KEYB001',N'B√†n ph√≠m LOGITECH','20/10/2018',6,'KEYB','LOGITECH',N'C√°i',4),
+('HP001',N'Tai nghe SONY','4/6/2019',12,'HP','SONY',N'C√°i',20),
+('PROJ001',N'M√°y chi·∫øu DELL','20/10/2018',12,'PROJ','DELL',N'C√°i',10),
+('PROJ002',N'M√°y chi·∫øu HP','20/10/2018',12,'PROJ','HP',N'C√°i',10),
+('PCX001',N'ASUS 20144','20/10/2018',12,'PCX','ASUS',N'C√°i',5)
 
 
 INSERT KHACHHANG
 VALUES
-('KH001',N'Nguy?n Thu T‚m',N'T‚y Ninh','0989751723'),
-('KH002',N'–inh B?o L?c',N'L‚m –?ng','0918234654'),
-('KH003',N'Tr?n Thanh Di?u',N'TP.HCM','0978123765'),
-('KH004',N'H? Tr?n Th‡nh',N'H‡ N?i','0909456768'),
-('KH005',N'Hu?nh Kim ¡nh',N'Kh·nh HÚa','0932987567')
+('KH001',N'Nguy·ªÖn Thu T√¢m',N'T√¢y Ninh','0989751723'),
+('KH002',N'ƒêinh B·∫£o L·ªôc',N'L√¢m ƒê·ªìng','0918234654'),
+('KH003',N'Tr·∫ßn Thanh Di·ªáu',N'TP.HCM','0978123765'),
+('KH004',N'H·ªì Tr·∫•n Th√†nh',N'H√† N·ªôi','0909456768'),
+('KH005',N'Hu·ª≥nh Kim √Ånh',N'Kh√°nh H√≤a','0932987567')
 
 INSERT HOADON
 VALUES
