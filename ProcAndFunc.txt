@@ -1,0 +1,11 @@
+Proc:
+	- Kiểm tra số lượng tồn kho của linh kiện (isSlTK)
+		+ input : tenlk, slgMua
+		+ output: 
+			- return 1: Là còn đủ hàng
+			- return 0: không đủ hàng
+	- Kiểm tra xem khách hàng có tồn tại chưa (isKhachHang)
+		+ input : tenkh
+		+ output: 
+			- return 1: đã tồn tại
+			- return 0: chưa tồn tại
