@@ -183,7 +183,7 @@ BEGIN
 	SET TRIGIA = (
 		SELECT SUM(SOLUONG*DONGIA)
 		FROM CHITIETPN
-		WHERE MAPN = HOADON.MAPN
+		WHERE MAPN = PHIEUNHAP.MAPN
 	)
 	FROM PHIEUNHAP JOIN inserted ON PHIEUNHAP.MAPN = inserted.MAPN
 -----------------------------------------------------------------------
@@ -207,14 +207,14 @@ BEGIN
 	SET TRIGIA = (
 		SELECT SUM(SOLUONG*DONGIA)
 		FROM CHITIETPN
-		WHERE MAPN = HOADON.MAPN
+		WHERE MAPN = PHIEUNHAP.MAPN
 	)
 	FROM PHIEUNHAP JOIN deleted ON PHIEUNHAP.MAPN = deleted.MAPN
 -----------------------------------------------------------------------
 END
 
 GO
-CREATE TRIGGER CAPNHAPDATHANG ON CHITIETPN
+CREATE TRIGGER CAPNHAPDATHANG_PN ON CHITIETPN
 AFTER UPDATE AS
 BEGIN
 	-- cập nhật số lượng tồn kho của linh kiện
@@ -229,7 +229,7 @@ BEGIN
 	SET TRIGIA = (
 		SELECT SUM(SOLUONG*DONGIA)
 		FROM CHITIETPN
-		WHERE MAPN = HOADON.MAHD
+		WHERE MAPN = PHIEUNHAP.MAPN
 	)
 	FROM PHIEUNHAP JOIN deleted ON PHIEUNHAP.MAPN = deleted.MAPN
 -----------------------------------------------------------------------
