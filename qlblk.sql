@@ -20,7 +20,7 @@ CREATE TABLE LINHKIEN
 CREATE TABLE KHACHHANG
 (
 	MAKH INT IDENTITY(1, 1) NOT NULL,
-	TENKH NVARCHAR(50),
+	TENKH NVARCHAR(50) NOT NULL,
 	DCHI NVARCHAR(MAX),
 	DTHOAI VARCHAR(15),
 	CONSTRAINT PK_KHACHHANG PRIMARY KEY (MAKH)
@@ -86,7 +86,7 @@ ADD CONSTRAINT CK_CHITIETPN_SOLUONG CHECK (SOLUONG > 0),
 		CONSTRAINT CK_CHITIETPN_DONGIA CHECK (DONGIA > 0)
 
 ------------------------------------
---  _____    _                    --
+--  _____    _        trigger     --
 -- |_   _| _(_)__ _ __ _ ___ _ _  --
 --   | || '_| / _` / _` / -_) '_| --
 --   |_||_| |_\__, \__, \___|_|   --
@@ -164,7 +164,7 @@ BEGIN
 -----------------------------------------------------------------------
 END
 
--- đặt hàng
+-- nhập hàng
 GO
 CREATE TRIGGER NHAPHANG ON CHITIETPN
 AFTER INSERT AS
@@ -214,7 +214,7 @@ BEGIN
 END
 
 GO
-CREATE TRIGGER CAPNHAPDATHANG_PN ON CHITIETPN
+CREATE TRIGGER CAPNHAPNHAPHANG ON CHITIETPN
 AFTER UPDATE AS
 BEGIN
 	-- cập nhật số lượng tồn kho của linh kiện
@@ -234,8 +234,96 @@ BEGIN
 	FROM PHIEUNHAP JOIN deleted ON PHIEUNHAP.MAPN = deleted.MAPN
 -----------------------------------------------------------------------
 END
+
+
+--------------------------------
+--  ___           _   data    --
+-- |   \   __ _  | |_   __ _  --
+-- | |) | / _` | |  _| / _` | --
+-- |___/  \__,_|  \__| \__,_| --
+--------------------------------
+INSERT LOAILK
+VALUES
+('MOU', N'Chuột'),
+('LAP', N'Máy tính sách tay'),
+('CPU', N'Bộ xử lí'),
+('PCX', N'Máy tính để bàn'),
+('MAI', N'Mainboard'),
+('KEYB', N'Bàn phím'),
+('HP', N'Tai nghe'),
+('SCREEN', N'Màn hình'),
+('PROJ', N'Máy chiếu')
+
+SET DATEFORMAT DMY
+INSERT LINHKIEN
+VALUES
+('SCREEN001', N'Màn hình máy tính ASUS', '20/10/2018', 12, 'SCREEN', 'ASUS', N'Cái', 20),
+('SCREEN002', N'Màn hình máy tính DELL', '12/04/2018', 12, 'SCREEN', 'DELL', N'Cái', 15),
+('MOU001', N'ChUột có dây LOGITECH', '19/06/2019', 6, 'MOU', 'LOGITECH', N'Cái', 34),
+('MOU002', N'ChUột không dây LOGITECH', '19/06/2019', 6, 'MOU', 'LOGITECH', N'Cái', 10),
+('MAI001', N'Mainboard ASUS', '17/5/2020', 12, 'MAI', 'ASUS', N'Cái', 27),
+('MAI002', N'Mainboard ATXX', '16/6/2020', 12, 'MAI', 'ATXX', N'Cái', 12),
+('CPU001', N'CPU Itel', '28/10/2018', 12, 'CPU', 'Itel', N'Cái', 10),
+('KEYB001', N'Bàn phím LOGITECH', '20/10/2018', 6, 'KEYB', 'LOGITECH', N'Cái', 4),
+('HP001', N'Tai nghe SONY', '4/6/2019', 12, 'HP', 'SONY', N'Cái', 20),
+('PROJ001', N'Máy chiếu DELL', '20/10/2018', 12, 'PROJ', 'DELL', N'Cái', 10),
+('PROJ002', N'Máy chiếu HP', '20/10/2018', 12, 'PROJ', 'HP', N'Cái', 10),
+('PCX001', N'ASUS 20144', '20/10/2018', 12, 'PCX', 'ASUS', N'Cái', 5)
+
+INSERT KHACHHANG (TENKH, DCHI, DTHOAI)
+VALUES
+(N'Nguyễn Thu Tâm', N'Tây Ninh', '0989751723'),
+(N'Đinh Bảo Lộc', N'Lâm Đồng', '0918234654'),
+(N'Trần Thanh Diệu', N'TP.HCM', '0978123765'),
+(N'Hồ Trấn Thành', N'Hà Nội', '0909456768'),
+(N'Huỳnh Kim Ánh', N'Khánh Hòa', '0932987567')
+
+INSERT HOADON (MAHD, NGAYHD, MAKH)
+VALUES
+('HD001', '3/4/2020', 1),
+('HD002', '13/5/2020', 1),
+('HD003', '23/9/2020', 1),
+('HD004', '13/2/2020', 2),
+('HD005', '22/7/2020', 3),
+('HD006', '15/10/2020', 4),
+('HD007', '25/10/2020', 4),
+('HD008', '17/12/2020', 5)
+
+INSERT CHITIETHD
+VALUES
+('HD001', 'SCREEN001', 2, 12000000),
+('HD002', 'MOU002', 3, 560000),
+('HD003', 'MAI002', 5, 22000000),
+('HD004', 'CPU001', 10, 27000000),
+('HD005', 'KEYB001', 1, 5000000),
+('HD006', 'HP001', 6, 7500000),
+('HD007', 'PCX001', 12, 340000000),
+('HD008', 'PROJ002', 9, 15000000)
+
+INSERT PHIEUNHAP (MAPN, NGAYNHAP)
+VALUES
+('PN001', '16/12/2019'),
+('PN002', '16/12/2019'),
+('PN003', '24/12/2019'),
+('PN004', '12/11/2019'),
+('PN005', '13/12/2019'),
+('PN006', '8/12/2019'),
+('PN007', '22/12/2019'),
+('PN008', '17/12/2019')
+
+INSERT CHITIETPN
+VALUES
+('PN001', 'SCREEN001', 20, 120000000),
+('PN002', 'MOU002', 30, 5600000),
+('PN003', 'MAI002', 50, 220000000),
+('PN004', 'CPU001', 26, 270000000),
+('PN005', 'KEYB001', 10, 50000000),
+('PN006', 'HP001', 60, 75000000),
+('PN007', 'PCX001', 70, 3400000000),
+('PN008', 'PROJ002', 20, 150000000)
+
 ----------------------------------------------------------
---  ___                            _   ___              --
+--  ___   Proc                     _   ___   Func       --
 -- | _ \_ _ ___  __   __ _ _ _  __| | | __|  _ _ _  __  --
 -- |  _/ '_/ _ \/ _| / _` | ' \/ _` | | _| || | ' \/ _| --
 -- |_| |_| \___/\__| \__,_|_||_\__,_| |_| \_,_|_||_\__| --
