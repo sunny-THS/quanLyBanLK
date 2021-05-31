@@ -1,3 +1,8 @@
+CREATE DATABASE QLBLK
+GO
+USE QLBLK
+GO
+
 CREATE TABLE LOAILK
 (
 	MALOAI VARCHAR(10) NOT NULL,
@@ -46,20 +51,20 @@ CREATE TABLE CHITIETHD  -- bill
 )
 CREATE TABLE PHIEUNHAP -- nhập hàng
 (
-  MAPN VARCHAR(10) NOT NULL,
-  NGAYNHAP DATE, -- default getdate()
-  TRIGIA MONEY -- trigger (i, d, u)     df = 0
-  CONSTRAINT PK_PN PRIMARY KEY (MAPN)
+	MAPN VARCHAR(10) NOT NULL,
+	NGAYNHAP DATE, -- default getdate()
+	TRIGIA MONEY -- trigger (i, d, u)     df = 0
+	CONSTRAINT PK_PN PRIMARY KEY (MAPN)
 )
 CREATE TABLE CHITIETPN
 (
-  MAPN VARCHAR(10) NOT NULL,
-  MALK VARCHAR(10) NOT NULL,
-  SOLUONG INT, -- check > 0
-  DONGIA MONEY, -- check > 0
-  CONSTRAINT PK_CTPN PRIMARY KEY (MAPN, MALK),
-  CONSTRAINT FK_CTPN_LK FOREIGN KEY (MALK) REFERENCES LINHKIEN(MALK),
-  CONSTRAINT FK_CTPN_PN FOREIGN KEY (MAPN) REFERENCES PHIEUNHAP(MAPN)
+	MAPN VARCHAR(10) NOT NULL,
+	MALK VARCHAR(10) NOT NULL,
+	SOLUONG INT, -- check > 0
+	DONGIA MONEY, -- check > 0
+	CONSTRAINT PK_CTPN PRIMARY KEY (MAPN, MALK),
+	CONSTRAINT FK_CTPN_LK FOREIGN KEY (MALK) REFERENCES LINHKIEN(MALK),
+	CONSTRAINT FK_CTPN_PN FOREIGN KEY (MAPN) REFERENCES PHIEUNHAP(MAPN)
 )
 
 -- tạo ràng buộc
@@ -234,7 +239,7 @@ BEGIN
 	FROM PHIEUNHAP JOIN deleted ON PHIEUNHAP.MAPN = deleted.MAPN
 -----------------------------------------------------------------------
 END
-
+GO
 
 --------------------------------
 --  ___           _   data    --
@@ -328,3 +333,39 @@ VALUES
 -- |  _/ '_/ _ \/ _| / _` | ' \/ _` | | _| || | ' \/ _| --
 -- |_| |_| \___/\__| \__,_|_||_\__,_| |_| \_,_|_||_\__| --
 ----------------------------------------------------------
+GO
+CREATE PROC GetMaKH @TenKH NVARCHAR(50)
+-- Nếu tìm thấy tên khách hàng thì trả về mã khách hàng tương ứng ngược lại trả về 0
+AS
+	DECLARE @MaKH INT
+	IF EXISTS (SELECT MAKH FROM KHACHHANG WHERE TENKH=@TenKH)
+		SELECT @MaKH=MAKH FROM KHACHHANG WHERE TENKH=@TenKH
+	ELSE RETURN 0
+	RETURN @MaKH
+GO
+
+CREATE PROC SLBanRa @MaLK VARCHAR(10), @NgayBan DATE
+-- Cho biết số lượng được bán ra của linh kiện sản phẩm X trong ngày bán Y
+AS
+	DECLARE @SLBan INT
+
+	IF NOT EXISTS(
+		SELECT SUM(SOLUONG)
+		FROM CHITIETHD CTHD JOIN HOADON HD
+		ON CTHD.MAHD=HD.MAHD
+		WHERE MALK=@MaLK AND NGAYHD=@NgayBan
+	) RETURN 0
+
+	SELECT @SLBan=SUM(SOLUONG)
+	FROM CHITIETHD CTHD JOIN HOADON HD
+		ON CTHD.MAHD=HD.MAHD
+	WHERE MALK=@MaLK AND NGAYHD=@NgayBan
+
+
+	RETURN @SLBan
+GO
+
+CREATE PROC DoanhSoBanHang @MaKH INT
+AS
+	
+GO
