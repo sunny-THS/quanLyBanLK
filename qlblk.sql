@@ -41,7 +41,7 @@ CREATE TABLE KHACHHANG
 )
 CREATE TABLE HOADON -- tổng kết hóa đơn xuất hàng
 (
-	MAHD VARCHAR(10) NOT NULL,
+	MAHD VARCHAR(10) NOT NULL, -- default proc auto code
 	NGAYHD DATE, -- default getdate()
 	MAKH INT,
 	MANV INT,
@@ -62,7 +62,7 @@ CREATE TABLE CHITIETHD  -- bill
 )
 CREATE TABLE PHIEUNHAP -- nhập hàng
 (
-	MAPN VARCHAR(10) NOT NULL,
+	MAPN VARCHAR(10) NOT NULL, -- default auto code
 	NGAYNHAP DATE, -- default getdate()
 	TRIGIA MONEY -- trigger (i, d, u)     df = 0
 	CONSTRAINT PK_PN PRIMARY KEY (MAPN)
@@ -294,16 +294,30 @@ VALUES
 (N'Hồ Trấn Thành', N'Hà Nội', '0909456768'),
 (N'Huỳnh Kim Ánh', N'Khánh Hòa', '0932987567')
 
-INSERT HOADON (MAHD, NGAYHD, MAKH)
+INSERT NHANVIEN (TENNV, NGAYSINH, GIOITINH)
 VALUES
-('HD001', '3/4/2020', 1),
-('HD002', '13/5/2020', 1),
-('HD003', '23/9/2020', 1),
-('HD004', '13/2/2020', 2),
-('HD005', '22/7/2020', 3),
-('HD006', '15/10/2020', 4),
-('HD007', '25/10/2020', 4),
-('HD008', '17/12/2020', 5)
+(N'Nguyễn Kim Ngọc', '4/11/1997', N'Nữ'),
+(N'Trần Đinh Bảo', '11/12/2001', N'Nam'),
+(N'Nguyễn Bảo Quyên', '5/1/1997', N'Nam'),
+(N'Lê Hồng Hà', '12/2/2000', N'Nữ'),
+(N'Trần Thành Công', '5/21/1998', N'Nam'),
+(N'Huỳnh Thu Hà', '2/25/2000', N'Nữ'),
+(N'Trương Thị My My', '4/24/1998', N'Nữ'),
+(N'Trần Bảo Quân', '5/2/1999', N'Nam'),
+(N'Võ Thị Thanh Hà', '1/1/2001', N'Nữ'),
+(N'Lý Yến Nhi', '5/15/1998', N'Nữ'),
+
+SET DATEFORMAT DMY
+INSERT HOADON (MAHD, NGAYHD, MAKH, MANV)
+VALUES
+('HD001', '3/4/2020', 1, 1),
+('HD002', '13/5/2020', 1, 2),
+('HD003', '23/9/2020', 1, 3),
+('HD004', '13/2/2020', 2, 4),
+('HD005', '22/7/2020', 3, 5),
+('HD006', '15/10/2020', 4, 6),
+('HD007', '25/10/2020', 4, 7),
+('HD008', '17/12/2020', 5, 1)
 
 INSERT CHITIETHD
 VALUES
@@ -316,6 +330,7 @@ VALUES
 ('HD007', 'PCX001', 12, 340000000),
 ('HD008', 'PROJ002', 9, 15000000)
 
+SET DATEFORMAT DMY
 INSERT PHIEUNHAP (MAPN, NGAYNHAP)
 VALUES
 ('PN001', '16/12/2019'),
@@ -417,5 +432,5 @@ GO
 CREATE UD_DoanhThu @maNV INT, @thang INT
 -- cập nhật doanh thu của nhân viên đó trong tháng x
 AS
-	
+
 GO
