@@ -47,7 +47,7 @@ CREATE TABLE HOADON -- tổng kết hóa đơn xuất hàng
 	MANV INT,
 	TRIGIA MONEY, -- trigger (i, d, u)     df = 0
 	CONSTRAINT PK_HOADON PRIMARY KEY (MAHD),
-	CONSTRAINT FK_HOADON_KHACHHANG FOREIGN KEY (MAKH) REFERENCES KHACHHANG(MAKH)
+	CONSTRAINT FK_HOADON_KHACHHANG FOREIGN KEY (MAKH) REFERENCES KHACHHANG(MAKH),
 	CONSTRAINT FK_HOADON_NV FOREIGN KEY (MANV) REFERENCES NHANVIEN(MANV)
 )
 CREATE TABLE CHITIETHD  -- bill
@@ -64,7 +64,7 @@ CREATE TABLE PHIEUNHAP -- nhập hàng
 (
 	MAPN VARCHAR(10) NOT NULL, -- default auto code
 	NGAYNHAP DATE, -- default getdate()
-	TRIGIA MONEY -- trigger (i, d, u)     df = 0
+	TRIGIA MONEY, -- trigger (i, d, u)     df = 0
 	CONSTRAINT PK_PN PRIMARY KEY (MAPN)
 )
 CREATE TABLE CHITIETPN
@@ -77,6 +77,150 @@ CREATE TABLE CHITIETPN
 	CONSTRAINT FK_CTPN_LK FOREIGN KEY (MALK) REFERENCES LINHKIEN(MALK),
 	CONSTRAINT FK_CTPN_PN FOREIGN KEY (MAPN) REFERENCES PHIEUNHAP(MAPN)
 )
+
+----------------------------------------------------------
+--  ___   Proc                     _   ___   Func       --
+-- | _ \_ _ ___  __   __ _ _ _  __| | | __|  _ _ _  __  --
+-- |  _/ '_/ _ \/ _| / _` | ' \/ _` | | _| || | ' \/ _| --
+-- |_| |_| \___/\__| \__,_|_||_\__,_| |_| \_,_|_||_\__| --
+----------------------------------------------------------
+GO
+CREATE PROC GetMaKH @TenKH NVARCHAR(50)
+-- Nếu tìm thấy tên khách hàng thì trả về mã khách hàng tương ứng ngược lại trả về 0
+AS
+	DECLARE @MaKH INT
+	IF EXISTS (SELECT MAKH FROM KHACHHANG WHERE TENKH=@TenKH)
+		SELECT @MaKH=MAKH FROM KHACHHANG WHERE TENKH=@TenKH
+	ELSE RETURN 0
+	RETURN @MaKH
+GO
+
+CREATE PROC GetMaNV @TenNV NVARCHAR(50)
+-- Nếu tìm thấy tên khách hàng thì trả về mã khách hàng tương ứng ngược lại trả về 0
+AS
+	DECLARE @MaNV INT
+	IF EXISTS (SELECT MaNV FROM NHANVIEN WHERE TENNV=@TenNV)
+		SELECT @MaNV=MANV FROM NHANVIEN WHERE TENNV=@TenNV
+	ELSE RETURN 0
+	RETURN @MaNV
+GO
+
+CREATE PROC SLBanRa @MaLK VARCHAR(10), @NgayBan DATE
+-- Cho biết số lượng được bán ra của linh kiện sản phẩm X trong ngày bán Y
+AS
+	DECLARE @SLBan INT
+
+	IF NOT EXISTS(
+		SELECT SUM(SOLUONG)
+		FROM CHITIETHD CTHD JOIN HOADON HD
+		ON CTHD.MAHD=HD.MAHD
+		WHERE MALK=@MaLK AND NGAYHD=@NgayBan
+	) RETURN 0
+
+	SELECT @SLBan=SUM(SOLUONG)
+	FROM CHITIETHD CTHD JOIN HOADON HD
+		ON CTHD.MAHD=HD.MAHD
+	WHERE MALK=@MaLK AND NGAYHD=@NgayBan
+
+
+	RETURN @SLBan
+GO
+
+CREATE PROC SLTonKho @TenLK NVARCHAR(50)
+-- GET số lượng linh kiện tồn kho
+AS
+	DECLARE @SL INT
+
+	IF NOT EXISTS(
+		SELECT SOLUONGTONKHO
+		FROM LINHKIEN
+		WHERE TENLK=@TenLK
+	) RETURN -1
+
+	SELECT @SL=SOLUONGTONKHO
+	FROM LINHKIEN
+	WHERE TENLK=@TenLK
+
+	RETURN @SL
+GO
+
+CREATE PROC DoanhSoBanHang @MaKH INT
+-- Lấy được doanh số bán hàng từ 1 khách hàng nào đó
+AS
+	DECLARE @TriGia MONEY
+	SELECT @TriGia=SUM(TRIGIA)
+	FROM HOADON
+	WHERE MAKH=@MaKH
+
+	IF @TriGia IS NULL
+		SELECT 0 doanhSo
+	ELSE SELECT @TriGia doanhSo
+GO
+
+CREATE PROC ThongTinLK @tenLK NVARCHAR(50)
+-- show thông tin linh kiện dựa trên tên linh kiện
+AS
+	SELECT MALK, TENLK, NGAYSX, TGBH, NSX
+	FROM LINHKIEN
+	WHERE TENLK=@tenLK
+GO
+
+CREATE PROC UD_DoanhThuNhanVien @nam INT
+-- cập nhật doanh thu của nhân viên trong năm x
+AS
+	UPDATE NHANVIEN
+	SET DOANHTHU = hd.DOANHTHU
+	FROM (
+		SELECT MANV, SUM(TRIGIA) DOANHTHU
+		FROM HOADON
+		WHERE YEAR(NGAYHD)=@nam
+		GROUP BY MANV
+	) hd
+	WHERE NHANVIEN.MANV=hd.MANV
+GO
+
+CREATE FUNCTION AUTO_IDHD()
+RETURNS VARCHAR(10)
+AS
+BEGIN
+	DECLARE @ID VARCHAR(10)
+
+	IF (SELECT COUNT(MAHD) FROM HOADON) = 0
+		SET @ID = '0'
+	ELSE
+		SELECT @ID = MAX(RIGHT(MAHD, 3)) FROM HOADON
+
+	SELECT @ID = CASE
+		WHEN @ID >=  0 and @ID < 9 THEN 'HD00' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
+		WHEN @ID >=  9 THEN 'HD0' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
+		WHEN @ID >= 99 THEN 'HD' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
+	END
+
+	RETURN @ID
+END
+GO
+
+CREATE FUNCTION AUTO_IDPN()
+RETURNS VARCHAR(10)
+AS
+BEGIN
+	DECLARE @ID VARCHAR(10)
+
+	IF (SELECT COUNT(MAPN) FROM PHIEUNHAP) = 0
+		SET @ID = '0'
+	ELSE
+		SELECT @ID = MAX(RIGHT(MAPN, 3)) FROM PHIEUNHAP
+
+	SELECT @ID = CASE
+		WHEN @ID >=  0 and @ID < 9 THEN 'PN00' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
+		WHEN @ID >=  9 THEN 'PN0' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
+		WHEN @ID >= 99 THEN 'PN' + CONVERT(CHAR, CONVERT(INT, @ID) + 1)
+	END
+
+	RETURN @ID
+END
+GO
+
 
 -- tạo ràng buộc
 
@@ -94,12 +238,14 @@ ADD CONSTRAINT CK_CHITIETHD_SOLUONG CHECK (SOLUONG > 0),
 
 ALTER TABLE PHIEUNHAP
 ADD CONSTRAINT CK_PHIEUNHAP_TRIGIA CHECK (TRIGIA >= 0),
-		CONSTRAINT DF_PHIEUNHAP_TRIGIA DEFAULT 0 FOR TRIGIA,
-		CONSTRAINT DF_PHIEUNHAP_NGAYHD DEFAULT GETDATE() FOR NGAYNHAP
+		CONSTRAINT DF_PHIEUNHAP_TRIGIA DEFAULT 0 FOR TRIGIA
 
 ALTER TABLE CHITIETPN
 ADD CONSTRAINT CK_CHITIETPN_SOLUONG CHECK (SOLUONG > 0),
 		CONSTRAINT CK_CHITIETPN_DONGIA CHECK (DONGIA > 0)
+
+ALTER TABLE NHANVIEN
+ADD CONSTRAINT DF_DOANHTHU DEFAULT 0 FOR DOANHTHU
 
 ------------------------------------
 --  _____    _        trigger     --
@@ -294,6 +440,7 @@ VALUES
 (N'Hồ Trấn Thành', N'Hà Nội', '0909456768'),
 (N'Huỳnh Kim Ánh', N'Khánh Hòa', '0932987567')
 
+SET DATEFORMAT MDY
 INSERT NHANVIEN (TENNV, NGAYSINH, GIOITINH)
 VALUES
 (N'Nguyễn Kim Ngọc', '4/11/1997', N'Nữ'),
@@ -305,7 +452,7 @@ VALUES
 (N'Trương Thị My My', '4/24/1998', N'Nữ'),
 (N'Trần Bảo Quân', '5/2/1999', N'Nam'),
 (N'Võ Thị Thanh Hà', '1/1/2001', N'Nữ'),
-(N'Lý Yến Nhi', '5/15/1998', N'Nữ'),
+(N'Lý Yến Nhi', '5/15/1998', N'Nữ')
 
 SET DATEFORMAT DMY
 INSERT HOADON (MAHD, NGAYHD, MAKH, MANV)
@@ -352,85 +499,3 @@ VALUES
 ('PN006', 'HP001', 60, 75000000),
 ('PN007', 'PCX001', 70, 3400000000),
 ('PN008', 'PROJ002', 20, 150000000)
-
-----------------------------------------------------------
---  ___   Proc                     _   ___   Func       --
--- | _ \_ _ ___  __   __ _ _ _  __| | | __|  _ _ _  __  --
--- |  _/ '_/ _ \/ _| / _` | ' \/ _` | | _| || | ' \/ _| --
--- |_| |_| \___/\__| \__,_|_||_\__,_| |_| \_,_|_||_\__| --
-----------------------------------------------------------
-GO
-CREATE PROC GetMaKH @TenKH NVARCHAR(50)
--- Nếu tìm thấy tên khách hàng thì trả về mã khách hàng tương ứng ngược lại trả về 0
-AS
-	DECLARE @MaKH INT
-	IF EXISTS (SELECT MAKH FROM KHACHHANG WHERE TENKH=@TenKH)
-		SELECT @MaKH=MAKH FROM KHACHHANG WHERE TENKH=@TenKH
-	ELSE RETURN 0
-	RETURN @MaKH
-GO
-
-CREATE PROC SLBanRa @MaLK VARCHAR(10), @NgayBan DATE
--- Cho biết số lượng được bán ra của linh kiện sản phẩm X trong ngày bán Y
-AS
-	DECLARE @SLBan INT
-
-	IF NOT EXISTS(
-		SELECT SUM(SOLUONG)
-		FROM CHITIETHD CTHD JOIN HOADON HD
-		ON CTHD.MAHD=HD.MAHD
-		WHERE MALK=@MaLK AND NGAYHD=@NgayBan
-	) RETURN 0
-
-	SELECT @SLBan=SUM(SOLUONG)
-	FROM CHITIETHD CTHD JOIN HOADON HD
-		ON CTHD.MAHD=HD.MAHD
-	WHERE MALK=@MaLK AND NGAYHD=@NgayBan
-
-
-	RETURN @SLBan
-GO
-
-CREATE PROC SLTonKho @TenLK NVARCHAR(50)
--- GET số lượng linh kiện tồn kho
-AS
-	DECLARE @SL INT
-
-	IF NOT EXISTS(
-		SELECT SOLUONGTONKHO
-		FROM LINHKIEN
-		WHERE TENLK=@TenLK
-	) RETURN -1
-
-	SELECT @SL=SOLUONGTONKHO
-	FROM LINHKIEN
-	WHERE TENLK=@TenLK
-
-	RETURN @SL
-GO
-
-CREATE PROC DoanhSoBanHang @MaKH INT
--- Lấy được doanh số bán hàng từ 1 khách hàng nào đó
-AS
-	DECLARE @TriGia MONEY
-	SELECT @TriGia=SUM(TRIGIA)
-	FROM HOADON
-	WHERE MAKH=@MaKH
-	IF @TriGia IS NULL
-		SELECT 0 doanhSo
-	ELSE SELECT @TriGia doanhSo
-GO
-
-CREATE PROC ThongTinLK @tenLK NVARCHAR(50)
--- show thông tin linh kiện dựa trên tên linh kiện
-AS
-	SELECT TENLK, NGAYSX, TGBH, NSX
-	FROM LINHKIEN
-	WHERE TENLK=@tenLK
-GO
-
-CREATE UD_DoanhThu @maNV INT, @thang INT
--- cập nhật doanh thu của nhân viên đó trong tháng x
-AS
-
-GO
