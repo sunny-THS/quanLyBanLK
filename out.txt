@@ -1,25 +1,376 @@
-﻿Changed database context to 'QLBLK'.
+﻿ID          MA         TENLK                                              TGBH        NSX
+----------- ---------- -------------------------------------------------- ----------- --------------------------------------------------
+          1 PROJ002    Máy chiếu HP                                                12 HP
 
-(9 rows affected)
+(1 rows affected)
+MALK       TENLK                                              NGAYSX           TGBH        MALOAI     NSX                                                DVT                            SOLUONGTONKHO
+---------- -------------------------------------------------- ---------------- ----------- ---------- -------------------------------------------------- ------------------------------ -------------
+CPU001     CPU Itel                                                 2018-10-28          12 CPU        Itel                                               Cái                                       26
+HP001      Tai nghe SONY                                            2019-06-04          12 HP         SONY                                               Cái                                       74
+KEYB001    Bàn phím LOGITECH                                        2018-10-20           6 KEYB       LOGITECH                                           Cái                                       13
+MAI001     Mainboard ASUS                                           2020-05-17          12 MAI        ASUS                                               Cái                                       27
+MAI002     Mainboard ATXX                                           2020-06-16          12 MAI        ATXX                                               Cái                                       57
+MOU001     ChUột có dây LOGITECH                                    2019-06-19           6 MOU        LOGITECH                                           Cái                                       34
+MOU002     ChUột không dây LOGITECH                                 2019-06-19           6 MOU        LOGITECH                                           Cái                                       37
+PCX001     ASUS 20144                                               2018-10-20          12 PCX        ASUS                                               Cái                                       63
+PROJ001    Máy chiếu DELL                                           2018-10-20          12 PROJ       DELL                                               Cái                                       10
+PROJ002    Máy chiếu HP                                             2018-10-20          12 PROJ       HP                                                 Cái                                       21
+SCREEN001  Màn hình máy tính ASUS                                   2018-10-20          12 SCREEN     ASUS                                               Cái                                       38
+SCREEN002  Màn hình máy tính DELL                                   2018-04-12          12 SCREEN     DELL                                               Cái                                       15
 
 (12 rows affected)
+ID          MA         TENLK                                              TGBH        NSX
+----------- ---------- -------------------------------------------------- ----------- --------------------------------------------------
+          1 MAI001     Mainboard ASUS                                              12 ASUS
+          2 PCX001     ASUS 20144                                                  12 ASUS
+          3 SCREEN001  Màn hình máy tính ASUS                                      12 ASUS
 
-(5 rows affected)
+(3 rows affected)
+MANV        TENNV                                              NGAYSINH         GIOITINH
+----------- -------------------------------------------------- ---------------- ----------
+          1 Nguyễn Kim Ngọc                                          1997-04-11 Nữ
+          2 Trần Đinh Bảo                                            2001-11-12 Nam
+          3 Nguyễn Bảo Quyên                                         1997-05-01 Nam
+          4 Lê Hồng Hà                                               2000-12-02 Nữ
+          5 Trần Thành Công                                          1998-05-21 Nam
+          6 Huỳnh Thu Hà                                             2000-02-25 Nữ
+          7 Trương Thị My My                                         1998-04-24 Nữ
+          8 Trần Bảo Quân                                            1999-05-02 Nam
+          9 Võ Thị Thanh Hà                                          2001-01-01 Nữ
+         10 Lý Yến Nhi                                               1998-05-15 Nữ
 
 (10 rows affected)
+MALOAI     TENLOAI
+---------- --------------------------------------------------
+CPU        Bộ xử lí
+HP         Tai nghe
+KEYB       Bàn phím
+LAP        Máy tính sách tay
+MAI        Mainboard
+MOU        Chuột
+PCX        Máy tính để bàn
+PROJ       Máy chiếu
+SCREEN     Màn hình
+
+(9 rows affected)
+ID          MA         TENLK                                              TGBH        NSX
+----------- ---------- -------------------------------------------------- ----------- --------------------------------------------------
+          1 MAI001     Mainboard ASUS                                              12 ASUS
+          2 MAI002     Mainboard ATXX                                              12 ATXX
+
+(2 rows affected)
+MAHD       NGAYHD           MAKH        MANV        TRIGIA
+---------- ---------------- ----------- ----------- ---------------------
+HD001            2020-04-03           1           1         24000000.0000
+HD002            2020-05-13           1           2          1680000.0000
+HD003            2020-09-23           1           3        110000000.0000
+HD004            2020-02-13           2           4        270000000.0000
+HD005            2020-07-22           3           5          5000000.0000
+HD006            2020-10-15           4           6         45000000.0000
+HD007            2020-10-25           4           7       4080000000.0000
+HD008            2020-12-17           5           1        135000000.0000
 
 (8 rows affected)
+Msg 102, Level 15, State 1, Server ADMIN\SQLEXPRESS, Procedure GetDoanhThu_NV, Line 28
+Incorrect syntax near '@DoanhThu'.
+Msg 208, Level 16, State 1, Server ADMIN\SQLEXPRESS, Line 1
+Invalid object name 'GetDoanhThu_NV'.
+ID          TENNV                                              DOANHTHU
+----------- -------------------------------------------------- ---------------------
+          1 Huỳnh Thu Hà                                               45000000.0000
+          2 Lê Hồng Hà                                                270000000.0000
+          3 Nguyễn Bảo Quyên                                          110000000.0000
+          4 Nguyễn Kim Ngọc                                           159000000.0000
+          5 Trần Đinh Bảo                                               1680000.0000
+          6 Trần Thành Công                                             5000000.0000
+          7 Trương Thị My My                                         4080000000.0000
+
+(7 rows affected)
+Msg 137, Level 15, State 2, Server ADMIN\SQLEXPRESS, Line 4
+Must declare the scalar variable "@nam".
+Msg 102, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 6
+Incorrect syntax near 'OG'.
+TENNV
+-------------------------------------------------- ---------------------
+Huỳnh Thu Hà                                               45000000.0000
+Lê Hồng Hà                                                270000000.0000
+Nguyễn Bảo Quyên                                          110000000.0000
+Nguyễn Kim Ngọc                                           159000000.0000
+Trần Đinh Bảo                                               1680000.0000
+Trần Thành Công                                             5000000.0000
+Trương Thị My My                                         4080000000.0000
+
+(7 rows affected)
+Msg 8120, Level 16, State 1, Server ADMIN\SQLEXPRESS, Line 1
+Column 'NHANVIEN.TENNV' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+TENNV
+-------------------------------------------------- ---------------------
+Huỳnh Thu Hà                                               45000000.0000
+Lê Hồng Hà                                                270000000.0000
+Lý Yến Nhi                                                          NULL
+Nguyễn Bảo Quyên                                          110000000.0000
+Nguyễn Kim Ngọc                                           159000000.0000
+Trần Bảo Quân                                                       NULL
+Trần Đinh Bảo                                               1680000.0000
+Trần Thành Công                                             5000000.0000
+Trương Thị My My                                         4080000000.0000
+Võ Thị Thanh Hà                                                     NULL
+
+(10 rows affected)
+MANV        TENNV                                              NGAYSINH         GIOITINH   MAHD       NGAYHD           MAKH        MANV        TRIGIA
+----------- -------------------------------------------------- ---------------- ---------- ---------- ---------------- ----------- ----------- ---------------------
+          1 Nguyễn Kim Ngọc                                          1997-04-11 Nữ         HD001            2020-04-03           1           1         24000000.0000
+          1 Nguyễn Kim Ngọc                                          1997-04-11 Nữ         HD008            2020-12-17           5           1        135000000.0000
+          2 Trần Đinh Bảo                                            2001-11-12 Nam        HD002            2020-05-13           1           2          1680000.0000
+          3 Nguyễn Bảo Quyên                                         1997-05-01 Nam        HD003            2020-09-23           1           3        110000000.0000
+          4 Lê Hồng Hà                                               2000-12-02 Nữ         HD004            2020-02-13           2           4        270000000.0000
+          5 Trần Thành Công                                          1998-05-21 Nam        HD005            2020-07-22           3           5          5000000.0000
+          6 Huỳnh Thu Hà                                             2000-02-25 Nữ         HD006            2020-10-15           4           6         45000000.0000
+          7 Trương Thị My My                                         1998-04-24 Nữ         HD007            2020-10-25           4           7       4080000000.0000
 
 (8 rows affected)
+Msg 8121, Level 16, State 1, Server ADMIN\SQLEXPRESS, Line 5
+Column 'HOADON.NGAYHD' is invalid in the HAVING clause because it is not contained in either an aggregate function or the GROUP BY clause.
+Msg 8120, Level 16, State 1, Server ADMIN\SQLEXPRESS, Line 1
+Column 'NHANVIEN.MANV' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+Msg 8121, Level 16, State 1, Server ADMIN\SQLEXPRESS, Line 5
+Column 'HOADON.NGAYHD' is invalid in the HAVING clause because it is not contained in either an aggregate function or the GROUP BY clause.
+TENNV
+-------------------------------------------------- ---------------------
+Lê Hồng Hà                                                270000000.0000
+Nguyễn Kim Ngọc                                            24000000.0000
+Trần Đinh Bảo                                               1680000.0000
+Trần Thành Công                                             5000000.0000
+Nguyễn Bảo Quyên                                          110000000.0000
+Huỳnh Thu Hà                                               45000000.0000
+Trương Thị My My                                         4080000000.0000
+Nguyễn Kim Ngọc                                           135000000.0000
 
 (8 rows affected)
+TENNV
+-------------------------------------------------- ---------------------
+Huỳnh Thu Hà                                                       .0000
+Huỳnh Thu Hà                                               45000000.0000
+Lê Hồng Hà                                                         .0000
+Lê Hồng Hà                                                270000000.0000
+Lý Yến Nhi                                                         .0000
+Nguyễn Bảo Quyên                                                   .0000
+Nguyễn Bảo Quyên                                          110000000.0000
+Nguyễn Kim Ngọc                                                    .0000
+Nguyễn Kim Ngọc                                           159000000.0000
+Trần Bảo Quân                                                      .0000
+Trần Đinh Bảo                                                      .0000
+Trần Đinh Bảo                                               1680000.0000
+Trần Thành Công                                                    .0000
+Trần Thành Công                                             5000000.0000
+Trương Thị My My                                                   .0000
+Trương Thị My My                                         4080000000.0000
+Võ Thị Thanh Hà                                                    .0000
 
-(8 rows affected)
+(17 rows affected)
+Msg 207, Level 16, State 1, Server ADMIN\SQLEXPRESS, Line 3
+Invalid column name 'MAVD'.
+Msg 102, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 8
+Incorrect syntax near '('.
+Msg 102, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 9
+Incorrect syntax near 'G'.
+Msg 102, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 9
+Incorrect syntax near '('.
+Msg 156, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 11
+Incorrect syntax near the keyword 'IS'.
+Msg 102, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 9
+Incorrect syntax near '('.
+Msg 102, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 9
+Incorrect syntax near '('.
+Msg 156, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 9
+Incorrect syntax near the keyword 'ANY'.
+TENNV
+-------------------------------------------------- ---------------------
+Huỳnh Thu Hà                                               45000000.0000
+Lê Hồng Hà                                                270000000.0000
+Lý Yến Nhi                                                         .0000
+Nguyễn Bảo Quyên                                          110000000.0000
+Nguyễn Kim Ngọc                                           159000000.0000
+Trần Bảo Quân                                                      .0000
+Trần Đinh Bảo                                               1680000.0000
+Trần Thành Công                                             5000000.0000
+Trương Thị My My                                         4080000000.0000
+Võ Thị Thanh Hà                                                    .0000
 
-(8 rows affected)
+(10 rows affected)
+TENNV                                              NGAYHD
+-------------------------------------------------- ---------------- ---------------------
+Lý Yến Nhi                                                     NULL                  NULL
+Trần Bảo Quân                                                  NULL                  NULL
+Võ Thị Thanh Hà                                                NULL                  NULL
+Lê Hồng Hà                                               2020-02-13        270000000.0000
+Nguyễn Kim Ngọc                                          2020-04-03         24000000.0000
+Trần Đinh Bảo                                            2020-05-13          1680000.0000
+Trần Thành Công                                          2020-07-22          5000000.0000
+Nguyễn Bảo Quyên                                         2020-09-23        110000000.0000
+Huỳnh Thu Hà                                             2020-10-15         45000000.0000
+Trương Thị My My                                         2020-10-25       4080000000.0000
+Nguyễn Kim Ngọc                                          2020-12-17        135000000.0000
 
-(8 rows affected)
+(11 rows affected)
+Msg 207, Level 16, State 1, Server ADMIN\SQLEXPRESS, Line 1
+Invalid column name 'TRIGIA'.
+Msg 8155, Level 16, State 2, Server ADMIN\SQLEXPRESS, Line 3
+No column name was specified for column 2 of 'TB'.
+Msg 156, Level 15, State 1, Server ADMIN\SQLEXPRESS, Line 6
+Incorrect syntax near the keyword 'GROUP'.
+TENNV
+-------------------------------------------------- ---------------------
+Huỳnh Thu Hà                                               45000000.0000
+Lê Hồng Hà                                                270000000.0000
+Lý Yến Nhi                                                          NULL
+Nguyễn Bảo Quyên                                          110000000.0000
+Nguyễn Kim Ngọc                                           159000000.0000
+Trần Bảo Quân                                                       NULL
+Trần Đinh Bảo                                               1680000.0000
+Trần Thành Công                                             5000000.0000
+Trương Thị My My                                         4080000000.0000
+Võ Thị Thanh Hà                                                     NULL
 
-(8 rows affected)
+(10 rows affected)
+ID          TENNV                                              DOANHTHU
+----------- -------------------------------------------------- ---------------------
+          1 Huỳnh Thu Hà                                               45000000.0000
+          2 Lê Hồng Hà                                                270000000.0000
+          3 Lý Yến Nhi                                                         .0000
+          4 Nguyễn Bảo Quyên                                          110000000.0000
+          5 Nguyễn Kim Ngọc                                           159000000.0000
+          6 Trần Bảo Quân                                                      .0000
+          7 Trần Đinh Bảo                                               1680000.0000
+          8 Trần Thành Công                                             5000000.0000
+          9 Trương Thị My My                                         4080000000.0000
+         10 Võ Thị Thanh Hà                                                    .0000
 
-(8 rows affected)
+(10 rows affected)
+ID          TENNV                                              DOANHTHU
+----------- -------------------------------------------------- ---------------------
+          1 Huỳnh Thu Hà                                               45000000.0000
+          2 Lê Hồng Hà                                                270000000.0000
+          3 Nguyễn Bảo Quyên                                          110000000.0000
+          4 Nguyễn Kim Ngọc                                           159000000.0000
+          5 Trần Đinh Bảo                                               1680000.0000
+          6 Trần Thành Công                                             5000000.0000
+          7 Trương Thị My My                                         4080000000.0000
+
+(7 rows affected)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ID          TENNV                                              DOANHTHU             
+----------- -------------------------------------------------- ---------------------
+
+(0 rows affected)
+TENNV                                              DOANHTHU             
+-------------------------------------------------- ---------------------
+Nguyễn Kim Ngọc                                           159000000.0000
+Trần Đinh Bảo                                               1680000.0000
+Nguyễn Bảo Quyên                                          110000000.0000
+Lê Hồng Hà                                                270000000.0000
+Trần Thành Công                                             5000000.0000
+Huỳnh Thu Hà                                               45000000.0000
+Trương Thị My My                                         4080000000.0000
+Trần Bảo Quân                                                       NULL
+Võ Thị Thanh Hà                                                     NULL
+Lý Yến Nhi                                                          NULL
+
+(10 rows affected)
+TENNV                                              DOANHTHU             
+-------------------------------------------------- ---------------------
+Nguyễn Kim Ngọc                                                     NULL
+Trần Đinh Bảo                                                       NULL
+Nguyễn Bảo Quyên                                                    NULL
+Lê Hồng Hà                                                          NULL
+Trần Thành Công                                                     NULL
+Huỳnh Thu Hà                                                        NULL
+Trương Thị My My                                                    NULL
+Trần Bảo Quân                                                       NULL
+Võ Thị Thanh Hà                                                     NULL
+Lý Yến Nhi                                                          NULL
+
+(10 rows affected)
+ID          TENNV                                              DOANHTHU             
+----------- -------------------------------------------------- ---------------------
+          1 Nguyễn Kim Ngọc                                                    .0000
+          2 Trần Đinh Bảo                                                      .0000
+          3 Nguyễn Bảo Quyên                                                   .0000
+          4 Lê Hồng Hà                                                         .0000
+          5 Trần Thành Công                                                    .0000
+          6 Huỳnh Thu Hà                                                       .0000
+          7 Trương Thị My My                                                   .0000
+          8 Trần Bảo Quân                                                      .0000
+          9 Võ Thị Thanh Hà                                                    .0000
+         10 Lý Yến Nhi                                                         .0000
+
+(10 rows affected)
+TENNV                                              DOANHTHU             
+-------------------------------------------------- ---------------------
+Nguyễn Kim Ngọc                                                     NULL
+Trần Đinh Bảo                                                       NULL
+Nguyễn Bảo Quyên                                                    NULL
+Lê Hồng Hà                                                          NULL
+Trần Thành Công                                                     NULL
+Huỳnh Thu Hà                                                        NULL
+Trương Thị My My                                                    NULL
+Trần Bảo Quân                                                       NULL
+Võ Thị Thanh Hà                                                     NULL
+Lý Yến Nhi                                                          NULL
+
+(10 rows affected)
+TENNV                                              DOANHTHU             
+-------------------------------------------------- ---------------------
+Nguyễn Kim Ngọc                                           159000000.0000
+Trần Đinh Bảo                                               1680000.0000
+Nguyễn Bảo Quyên                                          110000000.0000
+Lê Hồng Hà                                                270000000.0000
+Trần Thành Công                                             5000000.0000
+Huỳnh Thu Hà                                               45000000.0000
+Trương Thị My My                                         4080000000.0000
+Trần Bảo Quân                                                       NULL
+Võ Thị Thanh Hà                                                     NULL
+Lý Yến Nhi                                                          NULL
+
+(10 rows affected)
+ID          TENNV                                              DOANHTHU             
+----------- -------------------------------------------------- ---------------------
+          1 Nguyễn Kim Ngọc                                           159000000.0000
+          2 Trần Đinh Bảo                                               1680000.0000
+          3 Nguyễn Bảo Quyên                                          110000000.0000
+          4 Lê Hồng Hà                                                270000000.0000
+          5 Trần Thành Công                                             5000000.0000
+          6 Huỳnh Thu Hà                                               45000000.0000
+          7 Trương Thị My My                                         4080000000.0000
+          8 Trần Bảo Quân                                                      .0000
+          9 Võ Thị Thanh Hà                                                    .0000
+         10 Lý Yến Nhi                                                         .0000
+
+(10 rows affected)
+ID          TENNV                                              DOANHTHU             
+----------- -------------------------------------------------- ---------------------
+          1 Nguyễn Kim Ngọc                                                    .0000
+          2 Trần Đinh Bảo                                                      .0000
+          3 Nguyễn Bảo Quyên                                                   .0000
+          4 Lê Hồng Hà                                                         .0000
+          5 Trần Thành Công                                                    .0000
+          6 Huỳnh Thu Hà                                                       .0000
+          7 Trương Thị My My                                                   .0000
+          8 Trần Bảo Quân                                                      .0000
+          9 Võ Thị Thanh Hà                                                    .0000
+         10 Lý Yến Nhi                                                         .0000
+
+(10 rows affected)
+ID          TENNV                                              DOANHTHU             
+----------- -------------------------------------------------- ---------------------
+          1 Huỳnh Thu Hà                                               45000000.0000
+          2 Lê Hồng Hà                                                270000000.0000
+          3 Lý Yến Nhi                                                         .0000
+          4 Nguyễn Bảo Quyên                                          110000000.0000
+          5 Nguyễn Kim Ngọc                                           159000000.0000
+          6 Trần Bảo Quân                                                      .0000
+          7 Trần Đinh Bảo                                               1680000.0000
+          8 Trần Thành Công                                             5000000.0000
+          9 Trương Thị My My                                         4080000000.0000
+         10 Võ Thị Thanh Hà                                                    .0000
+
+(10 rows affected)
