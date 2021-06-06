@@ -1,0 +1,134 @@
+﻿MALK       TENLK                                              TGBH        NSX                                               
+---------- -------------------------------------------------- ----------- --------------------------------------------------
+CPU001     CPU Itel                                                    12 Itel                                              
+HP001      Tai nghe SONY                                               12 SONY                                              
+KEYB001    Bàn phím LOGITECH                                            6 LOGITECH                                          
+MAI001     Mainboard ASUS                                              12 ASUS                                              
+MAI002     Mainboard ATXX                                              12 ATXX                                              
+MOU001     ChUột có dây LOGITECH                                        6 LOGITECH                                          
+MOU002     ChUột không dây LOGITECH                                     6 LOGITECH                                          
+PCX001     ASUS 20144                                                  12 ASUS                                              
+PROJ001    Máy chiếu DELL                                              12 DELL                                              
+PROJ002    Máy chiếu HP                                                12 HP                                                
+SCREEN001  Màn hình máy tính ASUS                                      12 ASUS                                              
+SCREEN002  Màn hình máy tính DELL                                      12 DELL                                              
+
+(12 rows affected)
+ID          TENNV                                              NGAYSINH         GIOITINH  
+----------- -------------------------------------------------- ---------------- ----------
+          1 Trần Đinh Bảo                                            2001-11-12 Nam       
+          2 Trần Thành Công                                          1998-05-21 Nam       
+          3 Trần Bảo Quân                                            1999-05-02 Nam       
+
+(3 rows affected)
+ID          TENNV                                              NGAYSINH         GIOITINH  
+----------- -------------------------------------------------- ---------------- ----------
+          1 Nguyễn Kim Ngọc                                          1997-04-11 Nữ        
+          2 Lê Hồng Hà                                               2000-12-02 Nữ        
+          3 Huỳnh Thu Hà                                             2000-02-25 Nữ        
+          4 Trương Thị My My                                         1998-04-24 Nữ        
+          5 Võ Thị Thanh Hà                                          2001-01-01 Nữ        
+          6 Lý Yến Nhi                                               1998-05-15 Nữ        
+
+(6 rows affected)
+ID          MA         TENLK                                              TGBH        NSX                                               
+----------- ---------- -------------------------------------------------- ----------- --------------------------------------------------
+          1 PROJ001    Máy chiếu DELL                                              12 DELL                                              
+          2 PROJ002    Máy chiếu HP                                                12 HP                                                
+
+(2 rows affected)
+ID          MA         TENLK                                              TGBH        NSX                                               
+----------- ---------- -------------------------------------------------- ----------- --------------------------------------------------
+          1 MAI001     Mainboard ASUS                                              12 ASUS                                              
+          2 PCX001     ASUS 20144                                                  12 ASUS                                              
+          3 SCREEN001  Màn hình máy tính ASUS                                      12 ASUS                                              
+
+(3 rows affected)
+ID          MA         TENLK                                              TGBH        NSX                                               
+----------- ---------- -------------------------------------------------- ----------- --------------------------------------------------
+          1 PROJ001    Máy chiếu DELL                                              12 DELL                                              
+          2 SCREEN002  Màn hình máy tính DELL                                      12 DELL                                              
+
+(2 rows affected)
+ID          MA         TENLK                                              TGBH        NSX                                               
+----------- ---------- -------------------------------------------------- ----------- --------------------------------------------------
+          1 PROJ001    Máy chiếu DELL                                              12 DELL                                              
+          2 PROJ002    Máy chiếu HP                                                12 HP                                                
+
+(2 rows affected)
+Msg 216, Level 16, State 1, Server ADMIN\SQLEXPRESS, Line 1
+Parameters were not supplied for the function 'getdoanhthu_nv'.
+ID          TENNV                                              DOANHTHU             
+----------- -------------------------------------------------- ---------------------
+          1 Huỳnh Thu Hà                                               45000000.0000
+          2 Lê Hồng Hà                                                270000000.0000
+          3 Lý Yến Nhi                                                         .0000
+          4 Nguyễn Bảo Quyên                                          110000000.0000
+          5 Nguyễn Kim Ngọc                                           159000000.0000
+          6 Trần Bảo Quân                                                      .0000
+          7 Trần Đinh Bảo                                               1680000.0000
+          8 Trần Thành Công                                             5000000.0000
+          9 Trương Thị My My                                         4080000000.0000
+         10 Võ Thị Thanh Hà                                                    .0000
+
+(10 rows affected)
+ID          TENNV                                              DOANHTHU             
+----------- -------------------------------------------------- ---------------------
+          1 Nguyễn Kim Ngọc                                           159000000.0000
+          2 Trần Đinh Bảo                                               1680000.0000
+          3 Nguyễn Bảo Quyên                                          110000000.0000
+          4 Lê Hồng Hà                                                270000000.0000
+          5 Trần Thành Công                                             5000000.0000
+          6 Huỳnh Thu Hà                                               45000000.0000
+          7 Trương Thị My My                                         4080000000.0000
+          8 Trần Bảo Quân                                                      .0000
+          9 Võ Thị Thanh Hà                                                    .0000
+         10 Lý Yến Nhi                                                         .0000
+
+(10 rows affected)
+ID          TENNV                                              DOANHTHU             
+----------- -------------------------------------------------- ---------------------
+          1 Nguyễn Kim Ngọc                                                    .0000
+          2 Trần Đinh Bảo                                                      .0000
+          3 Nguyễn Bảo Quyên                                                   .0000
+          4 Lê Hồng Hà                                                         .0000
+          5 Trần Thành Công                                                    .0000
+          6 Huỳnh Thu Hà                                                       .0000
+          7 Trương Thị My My                                                   .0000
+          8 Trần Bảo Quân                                                      .0000
+          9 Võ Thị Thanh Hà                                                    .0000
+         10 Lý Yến Nhi                                                         .0000
+
+(10 rows affected)
+ID          THANG       DOANHTHU             
+----------- ----------- ---------------------
+          1           1                 .0000
+          2           2        270000000.0000
+          3           3                 .0000
+          4           4         24000000.0000
+          5           5          1680000.0000
+          6           6                 .0000
+          7           7          5000000.0000
+          8           8                 .0000
+          9           9        110000000.0000
+         10          10       4125000000.0000
+         11          11                 .0000
+         12          12        135000000.0000
+
+(12 rows affected)
+ID          THANG       DOANHTHU             
+----------- ----------- ---------------------
+          1           1                 .0000
+          2           2                 .0000
+          3           3                 .0000
+          4           4                 .0000
+          5           5                 .0000
+          6           6                 .0000
+          7           7                 .0000
+          8           8                 .0000
+          9           9                 .0000
+         10          10                 .0000
+         11          11                 .0000
+         12          12                 .0000
+
+(12 rows affected)
