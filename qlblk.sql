@@ -119,7 +119,6 @@ AS
 		ON CTHD.MAHD=HD.MAHD
 	WHERE MALK=@MaLK AND NGAYHD=@NgayBan
 
-
 	RETURN @SLBan
 GO
 
@@ -142,7 +141,7 @@ AS
 GO
 
 CREATE PROC DoanhSoBanHang @MaKH INT
--- Lấy được doanh số bán hàng từ 1 khách hàng nào đó
+-- Lấy được doanh SÔ bán hàng thu được 1 khách hàng nào đó
 AS
 	DECLARE @TriGia MONEY
 	SELECT @TriGia=SUM(TRIGIA)
@@ -154,13 +153,13 @@ AS
 	ELSE SELECT @TriGia doanhSo
 GO
 
-CREATE PROC ThongTinLK @tenLK NVARCHAR(50)
--- show thông tin linh kiện dựa trên tên linh kiện
-AS
-	SELECT MALK, TENLK, NGAYSX, TGBH, NSX
-	FROM LINHKIEN
-	WHERE TENLK=@tenLK
-GO
+-- CREATE PROC ThongTinLK @tenLK NVARCHAR(50)
+-- -- show thông tin linh kiện dựa trên tên linh kiện
+-- AS
+-- 	SELECT MALK, TENLK, NGAYSX, TGBH, NSX
+-- 	FROM LINHKIEN
+-- 	WHERE TENLK=@tenLK
+-- GO
 
 -- CREATE OR ALTER PROC UD_DoanhThuNhanVien @nam INT
 -- -- cập nhật doanh thu của nhân viên trong năm x
@@ -218,6 +217,17 @@ BEGIN
 END
 GO
 
+CREATE FUNCTION ShowTTLK ()
+-- hiển thị tất cả thông tin linh kiện
+RETURNS TABLE
+AS
+RETURN
+	SELECT MALK, TENLK, TGBH, NSX
+	FROM LINHKIEN
+GO
+
+-- tìm thông tin nhân viên
+
 CREATE FUNCTION TimTTNhanVien (@tenNV NVARCHAR(50))
 -- tìm thông tin của nhân viên dựa trên tên của nhân viên tương ứng
 RETURNS @list TABLE (
@@ -232,6 +242,45 @@ BEGIN
 	SELECT TENNV, NGAYSINH, GIOITINH
 	FROM NHANVIEN
 	WHERE LOWER(TENNV) LIKE LOWER(RTRIM(@tenNV)) + '%'
+	RETURN
+END
+GO
+
+ALTER FUNCTION TimTTNhanVien_SEX (@sex NVARCHAR(10))
+-- tìm thông tin của nhân viên dựa giới tính
+RETURNS @list TABLE (
+	ID INT IDENTITY PRIMARY KEY,
+	TENNV NVARCHAR(50),
+	NGAYSINH DATE,
+	GIOITINH NVARCHAR(10)
+)
+AS
+BEGIN
+	INSERT INTO @list
+	SELECT TENNV, NGAYSINH, GIOITINH
+	FROM NHANVIEN
+	WHERE LOWER(GIOITINH) = LOWER(@sex)
+	RETURN
+END
+GO
+
+-- tìm thông tin linh kiện
+
+CREATE FUNCTION TimTTLK_Ten (@tenLK NVARCHAR(50))
+-- tìm thông tin của LINH KIỆN dựa trên tên của LINH KIỆN
+RETURNS @list TABLE (
+	ID INT IDENTITY PRIMARY KEY,
+	MA VARCHAR(10),
+	TENLK NVARCHAR(50),
+	TGBH INT,
+	NSX NVARCHAR(50)
+)
+AS
+BEGIN
+	INSERT INTO @list
+	SELECT MALK, TENLK, TGBH, NSX
+	FROM LINHKIEN
+	WHERE LOWER(TENLK) LIKE LOWER(RTRIM(@tenLK)) + '%'
 	RETURN
 END
 GO
@@ -275,6 +324,18 @@ BEGIN
 END
 GO
 
+-- doanh thu
+
+CREATE FUNCTION DOANHTHU_YEAR (@nam INT)
+-- hiện thị doanh thu trong 1 năm @nam
+RETURNS TABLE
+AS
+RETURN
+	SELECT MAHD, MONTH(NGAYHD) THANG, TRIGIA, MAKH, MANV
+	FROM HOADON
+	WHERE YEAR(NGAYHD) = @nam
+GO
+
 CREATE FUNCTION GetDoanhThu_NV ()
 -- hàm sẽ trả về tổng doanh thu của mỗi nhân viên
 RETURNS @list TABLE
@@ -315,7 +376,7 @@ BEGIN
 END
 GO
 
-CREATE FUNCTION DoanhThu_NV_YEAR (@nam INT)
+ALTER FUNCTION DoanhThu_NV_YEAR (@nam INT)
 -- hàm sẽ trả về doanh thu của mỗi nhân viên đã đạt được trong năm @nam
 RETURNS @list TABLE
 (
@@ -327,9 +388,8 @@ AS
 BEGIN
 	INSERT INTO @list
 	SELECT TENNV, SUM(TRIGIA)
-	FROM NHANVIEN NV JOIN HOADON HD
+	FROM NHANVIEN NV JOIN DOANHTHU_YEAR(@nam) HD
 		ON NV.MANV = HD.MANV
-	WHERE YEAR(NGAYHD) = @nam
 	GROUP BY TENNV
 	RETURN
 END
@@ -372,6 +432,53 @@ BEGIN
 	RETURN
 END
 GO
+
+CREATE FUNCTION GetDoanhThu_EACH_MIY (@nam INT)
+-- hàm sẽ trả về doanh thu của mỗi tháng trong năm @nam
+RETURNS @list TABLE
+(
+	ID INT IDENTITY PRIMARY KEY,
+	THANG INT,
+	DOANHTHU MONEY
+)
+AS
+BEGIN
+	DECLARE @DoanhThu MONEY
+	DECLARE @Month INT
+
+	DECLARE C_ThongKeDT CURSOR FOR
+	SELECT m, SUM(TRIGIA) DOANHTHU
+	FROM DoanhThu_YEAR(@nam) dtn RIGHT JOIN (
+	  SELECT m
+	  FROM (VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12))
+	    [1 to 12](m)
+	) listMonth
+	  ON dtn.THANG=listMonth.m
+	GROUP BY m
+	ORDER BY m
+
+
+	OPEN C_ThongKeDT
+
+	FETCH NEXT FROM C_ThongKeDT INTO @Month, @DoanhThu
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		IF @DoanhThu IS NULL
+			SET @DoanhThu = 0
+
+		INSERT INTO @list
+		SELECT @Month, @DoanhThu
+
+		FETCH NEXT FROM C_ThongKeDT INTO @Month, @DoanhThu
+	END
+	CLOSE C_ThongKeDT
+	DEALLOCATE C_ThongKeDT
+
+	RETURN
+END
+GO
+
 -- tạo ràng buộc
 
 ALTER TABLE LINHKIEN
