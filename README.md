@@ -1,8 +1,13 @@
 # quanLyBanLK
+## Task
+- [ ] mô hình 2 lớp
+- [ ] Hoàn thành câu 1
+  - [ ] tạo table show thông tin LK
+- [ ] Hoàn thành câu 2
 ## error
 - [ ] trigger xuất hàng
   - [ ] check xem đủ hàng xuất hay k
-  - [ ] xuất lỗi 
+  - [ ] xuất lỗi
 ## Procedure & Function
 ### Procedure
 - [ ] GetMaKH(tenKH)
