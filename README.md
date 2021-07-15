@@ -1,5 +1,8 @@
 # quanLyBanLK
-
+## error
+- [ ] trigger xuất hàng
+  - [ ] check xem đủ hàng xuất hay k
+  - [ ] xuất lỗi 
 ## Procedure & Function
 ### Procedure
 - [ ] GetMaKH(tenKH)
