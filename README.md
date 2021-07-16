@@ -1,22 +1,29 @@
 # quanLyBanLK
 ## Task
-- [ ] mô hình 2 lớp
+- [x] pojo
+  - [x] pojoLinhKien
+  - [x] pojoNhanVien
+  - [x] pojoKhachHang
+  - [x] pojoHoaDon
+  - [x] pojoPhieuNhap
+- [x] mô hình 2 lớp
 - [ ] Hoàn thành câu 1
-  - [ ] tạo table show thông tin LK
+  - [x] tạo table show thông tin LK
 - [ ] Hoàn thành câu 2
 ## error
-- [ ] trigger xuất hàng
-  - [ ] check xem đủ hàng xuất hay k
-  - [ ] xuất lỗi
+- [x] trigger xuất hàng
+  - [x] check xem đủ hàng xuất hay k
+  - [x] xuất lỗi
 ## Procedure & Function
 ### Procedure
+- [x] addLK(tenLK, tenLoai, ngSX, tgbh, nsx, dvt, sl)
 - [ ] GetMaKH(tenKH)
 - [ ] GetMaNV(tenNV)
 - [ ] SLBanRa(maLK, ngayBan)
 - [ ] SLTonKho(tenLK)
 - [ ] DoanhSoBanHang(maKH)
 ### Function
-- [ ] ShowTTLK()
+- [x] ShowTTLK()
 - [ ] find Information
   - [ ] TimTTNhanVien(tenNV)
   - [ ] TimTTNhanVien_gender(gender)
