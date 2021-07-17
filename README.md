@@ -14,11 +14,12 @@
   - [x] chỉnh sửa thông tin linh kiện
 - [ ] Hoàn thành câu 2
 - [ ] Hoàn thành câu 3
+  - [x] tạo 2 dialog tìm kiếm
   - [ ] tìm kiếm thông tin nhân viên
     - [ ] họ tên
     - [ ] gender (giới tính)
   - [ ] tìm kiếm thông tin các linh kiện
-    - [ ] têm linh kiện
+    - [ ] tên linh kiện
     - [ ] theo nhà sãn xuất
     - [ ] theo loại linh kiện
 ## error
