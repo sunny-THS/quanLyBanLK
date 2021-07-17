@@ -95,6 +95,20 @@ CREATE TABLE CHITIETPN
 -- |  _/ '_/ _ \/ _| / _` | ' \/ _` | | _| || | ' \/ _| --
 -- |_| |_| \___/\__| \__,_|_||_\__,_| |_| \_,_|_||_\__| --
 ----------------------------------------------------------
+CREATE PROC updateTT @maLK VARCHAR(10), @tenLK NVARCHAR(50), @baoHanh INT, @NSX NVARCHAR(50), @soLuong INT
+AS
+	BEGIN TRY
+		UPDATE LINHKIEN
+		SET TENLK = @tenLK, TGBH=@baoHanh, NSX=@NSX, SOLUONGTONKHO=@soLuong
+		WHERE MALK=@maLK
+	END TRY
+	BEGIN CATCH
+		RETURN -1
+	END CATCH
+
+	RETURN 1
+GO
+
 CREATE PROC addLK @tenLK NVARCHAR(50), @tenLoai NVARCHAR(50), @ngSX DATE, @tgbh INT, @nsx NVARCHAR(50), @dvt NVARCHAR(30), @sl INT
 AS
 	DECLARE @maLOAI VARCHAR(10)
