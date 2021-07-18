@@ -13,6 +13,8 @@
   - [x] xóa linh kiện
   - [x] chỉnh sửa thông tin linh kiện
 - [ ] Hoàn thành câu 2
+  - [ ] tìm hiểu về report [link] (https://www.quadbase.com/gallery/sample-reports/)
+  - [ ] built form thống kê
 - [x] Hoàn thành câu 3
   - [x] tạo 2 dialog tìm kiếm
   - [x] tìm kiếm thông tin nhân viên
@@ -44,8 +46,10 @@
   - [x] TimTTLK_NSX(tenNSX)
   - [x] TimTTLK_LOAI(tenLoaiLK)
 - [ ] thông kê doanh thu
-  - [ ] DOANHTHU_YEAR(year)
   - [ ] GetDoanhThu_NV()
   - [ ] GetDoanhThu_NV_YEAR(year)
     - [ ] DoanhThu_NV_YEAR(year)
+    - [ ] DOANHTHU_YEAR(year)
+  - [ ] doanhThuCTy()
+  - [ ] doanhThuCTy_YEAR(year)
   - [ ] GetDoanhThu_EACH_MIY(year)
