@@ -15,13 +15,13 @@
 - [ ] Hoàn thành câu 2
 - [ ] Hoàn thành câu 3
   - [x] tạo 2 dialog tìm kiếm
-  - [ ] tìm kiếm thông tin nhân viên
-    - [ ] họ tên
-    - [ ] gender (giới tính)
-  - [ ] tìm kiếm thông tin các linh kiện
-    - [ ] tên linh kiện
-    - [ ] theo nhà sãn xuất
-    - [ ] theo loại linh kiện
+  - [x] tìm kiếm thông tin nhân viên
+    - [x] họ tên
+    - [x] gender (giới tính)
+  - [x] tìm kiếm thông tin các linh kiện
+    - [x] tên linh kiện
+    - [x] theo nhà sãn xuất
+    - [x] theo loại linh kiện
 ## error
 - [x] trigger xuất hàng
   - [x] check xem đủ hàng xuất hay k
@@ -46,6 +46,6 @@
 - [ ] thông kê doanh thu
   - [ ] DOANHTHU_YEAR(year)
   - [ ] GetDoanhThu_NV()
-  - [ ] GetDoanhThu_NV_YEAR()
+  - [ ] GetDoanhThu_NV_YEAR(year)
     - [ ] DoanhThu_NV_YEAR(year)
   - [ ] GetDoanhThu_EACH_MIY(year)
