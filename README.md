@@ -13,7 +13,7 @@
   - [x] xóa linh kiện
   - [x] chỉnh sửa thông tin linh kiện
 - [ ] Hoàn thành câu 2
-- [ ] Hoàn thành câu 3
+- [x] Hoàn thành câu 3
   - [x] tạo 2 dialog tìm kiếm
   - [x] tìm kiếm thông tin nhân viên
     - [x] họ tên
