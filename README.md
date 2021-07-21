@@ -1,4 +1,8 @@
 # quanLyBanLK
+
+## Project
+- [link tải] (https://storage.googleapis.com/savedata-sd.appspot.com/project_QLBLK.rar)
+
 ## Task
 - [x] pojo
   - [x] pojoLinhKien
@@ -12,11 +16,11 @@
   - [x] thêm linh kiện
   - [x] xóa linh kiện
   - [x] chỉnh sửa thông tin linh kiện
-- [ ] Hoàn thành câu 2
+- [x] Hoàn thành câu 2
   - [x] tìm hiểu về report [link] (https://www.quadbase.com/gallery/sample-reports/)
   - [x] built form thống kê
   - [x] thống kê doanh thu công ty
-  - [ ] thống kê daonh thu của nhân viên
+  - [x] thống kê doanh thu của nhân viên
 - [x] Hoàn thành câu 3
   - [x] tạo 2 dialog tìm kiếm
   - [x] tìm kiếm thông tin nhân viên
