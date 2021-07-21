@@ -51,9 +51,9 @@
   - [x] TimTTLK_Ten(tenLK)
   - [x] TimTTLK_NSX(tenNSX)
   - [x] TimTTLK_LOAI(tenLoaiLK)
-- [ ] thông kê doanh thu
-  - [ ] GetDoanhThu_NV() Tổng doanh thu của nhân viên
-  - [ ] GetDoanhThu_NV_YEAR(year)
-    - [ ] DoanhThu_NV_YEAR(year)
-    - [ ] DOANHTHU_YEAR(year)
+- [x] thông kê doanh thu
+  - [x] GetDoanhThu_NV() Tổng doanh thu của nhân viên
+  - [x] GetDoanhThu_NV_YEAR(year)
+    - [x] DoanhThu_NV_YEAR(year)
+    - [x] DOANHTHU_YEAR(year)
   - [x] GetDoanhThu_EACH_MIY(year)
