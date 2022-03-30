@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="580cabfc-8d97-4875-ab5e-492655908227">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="data" uuid="a2022cb4-ad4b-40aa-bf2a-47bc3080eedd">
+		<parameter name="year" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select * from GetDoanhThu_EACH_MIY($P{year})]]>
+		</queryString>
+		<field name="ID" class="java.lang.Integer"/>
+		<field name="THANG" class="java.lang.String"/>
+		<field name="DOANHTHU" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["../../report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="year" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select 1]]>
+	</queryString>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="7f9dc29b-33e2-4949-8f7a-825c79b2da3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thống Kê]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="178" splitType="Stretch">
+			<lineChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="159" uuid="f9a03c7c-224d-4bd3-8ea1-4e446325848f"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="data" uuid="7025b3ea-66de-4885-920a-c1386cf1bec4">
+							<datasetParameter name="year">
+								<datasetParameterExpression><![CDATA[$P{year}]]></datasetParameterExpression>
+							</datasetParameter>
+						</datasetRun>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Doang thu (VNĐ)"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{THANG}.split("Tháng ").join(" ").trim()]]></categoryExpression>
+						<valueExpression><![CDATA[$F{DOANHTHU}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+		<band height="41">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="41" uuid="23d7837d-a580-4487-8f3d-64a6b9242dd0"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ThongKeDoanhThu_subreportDoanhThu.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ThongKeDoanhThu_subreportDoanhThu" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3ca3f6dd-5196-470d-ae66-26809726a8ee">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select * from GetDoanhThu_EACH_MIY($P{year})]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="THANG" class="java.lang.String"/>
+	<field name="DOANHTHU" class="java.math.BigDecimal"/>
+	<variable name="total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{DOANHTHU}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="186" y="0" width="100" height="21" uuid="3b10ba02-74cb-43b8-b265-28d8f3a77a19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tháng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="0" width="136" height="21" uuid="1489cba0-da36-4342-8ece-87c24e9ab334"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doanh Thu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="0" width="100" height="21" uuid="f5b2bcc0-f321-430c-b28f-e6c546a35f32"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<line>
+				<reportElement x="86" y="21" width="372" height="1" uuid="b2a448ec-2429-450d-9ef8-b6fe835cb096"/>
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="86" y="0" width="100" height="31" uuid="34816614-d721-4c06-9dc3-a785901e10cd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="0" width="100" height="31" uuid="a8f88c46-44d9-4315-b6ad-b9769b4b839d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{THANG}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0 VNĐ">
+				<reportElement x="322" y="0" width="136" height="31" uuid="353702f8-672b-49c0-a42d-6f5eebb73157"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DOANHTHU}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="94" splitType="Stretch">
+			<textField pattern="#,##0 VNĐ">
+				<reportElement x="322" y="1" width="136" height="31" uuid="2af8d113-eca7-4bd9-a1d4-22d2e1568a26"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="86" y="0" width="100" height="32" uuid="6f8443d9-479a-48bf-adf5-c89a2608eb1a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tổng]]></text>
+			</staticText>
+			<line>
+				<reportElement x="86" y="1" width="372" height="1" uuid="d02ab7dd-40e8-431a-8a59-060fcede40d9"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

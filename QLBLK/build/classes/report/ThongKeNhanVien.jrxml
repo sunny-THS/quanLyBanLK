@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="26242498-66cf-4f2a-bb2c-90c1413adcf8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="data" uuid="a33276f3-7be6-499a-868f-e1e1762d3440">
+		<parameter name="year" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select id, nv.*, doanhthu 
+from GetDoanhThu_NV_YEAR($P{year}) dtnv join nhanvien nv
+on dtnv.tennv=nv.tennv]]>
+		</queryString>
+		<field name="id" class="java.lang.Integer"/>
+		<field name="MANV" class="java.lang.Integer"/>
+		<field name="TENNV" class="java.lang.String"/>
+		<field name="NGAYSINH" class="java.sql.Date"/>
+		<field name="GIOITINH" class="java.lang.String"/>
+		<field name="doanhthu" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\github\\programming_language\\java\\baiTapTrenTruong\\QLBLK\\src\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="year" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select 1]]>
+	</queryString>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="2930451a-c67b-4a1d-8fd9-9a8a911b6234"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thống kê]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="40" uuid="2745c599-360a-4f35-921f-4e236ea17f26"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ThongKeNhanVien_subreportTKNV.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="356">
+			<pieChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="356" uuid="b5e76126-0f50-4269-8548-708e5f208e1a"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="data" uuid="56167954-6b8d-4abd-9137-554bb0563b43">
+							<datasetParameter name="year">
+								<datasetParameterExpression><![CDATA[$P{year}]]></datasetParameterExpression>
+							</datasetParameter>
+						</datasetRun>
+					</dataset>
+					<keyExpression><![CDATA[$F{TENNV}]]></keyExpression>
+					<valueExpression><![CDATA[$F{doanhthu}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</detail>
+</jasperReport>
